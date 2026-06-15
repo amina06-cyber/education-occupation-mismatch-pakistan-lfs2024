@@ -1,58 +1,48 @@
 # Code
 
-This folder contains all the code used for data cleaning, variable construction, analysis, and visualization.
+Two files here, one Stata do-file that does basically everything, and a Python notebook just for the histogram since I wanted it to look nicer than what Stata produces.
 
 ---
 
 ## Files
 
-| File | Software | Description |
-|---|---|---|
-| `analysis.do` | Stata 17 | Full pipeline — cleaning, mismatch construction, descriptive stats, graphs, regression |
-| `histogram.ipynb` | Python (Google Colab) | Income distribution histogram with navy and gold theme |
+| File | What it does |
+|---|---|
+| `analysis.do` | Main Stata file, cleaning, mismatch construction, descriptive stats, graphs, regression |
+| `histogram.ipynb` | Python notebook for the income distribution histogram |
 
 ---
 
-## How to Run
+## Running the Stata file
 
-### Stata (`analysis.do`)
-1. Download the raw LFS 2024-25 file from PBS
-2. Open Stata and set your working directory to the project folder
-3. Run `analysis.do` from start to finish
-4. All outputs will be saved in the `graphs/` folder
+You'll need the raw LFS 2024-25 file from PBS first. Once you have it:
 
 ```stata
 cd "your/project/folder"
 do analysis.do
 ```
 
-### Python (`histogram.ipynb`)
-1. Open Google Colab or Jupyter Notebook
-2. Upload `Mismatch_Earnings_LFS2024_25_clean.csv` from the `data/` folder
-3. Run all cells in order
+The do-file goes through everything in order — loads the data, cleans it, builds the mismatch variable, runs descriptive stats, makes the graphs, and runs the regression. Comments inside the file explain each step.
 
 ---
 
-## What the Stata Do-File Does
+## Running the Python notebook
 
-| Step | What it does |
-|---|---|
-| 1 | Loads raw LFS data |
-| 2 | Filters to employed wage workers |
-| 3 | Cleans income variable — drops missing, zero, outliers |
-| 4 | Converts education categories to years of schooling |
-| 5 | Extracts ISCO-08 major occupation groups |
-| 6 | Assigns required education per occupation group |
-| 7 | Creates OverEdu, UnderEdu, matched dummies |
-| 8 | Creates control variables — female, urban, age squared, experience |
-| 9 | Runs descriptive statistics and cross-tabulations |
-| 10 | Generates all graphs |
-| 11 | Runs OLS regression — Model 1 (basic) and Model 2 (full) |
-| 12 | Saves final cleaned dataset |
+Open `histogram.ipynb` in Google Colab or Jupyter. Upload the CSV file from the `data/` folder and run all cells. It uses pandas and matplotlib — no extra installs needed if you're on Colab.
 
 ---
 
-## Software Requirements
+## What the do-file actually does 
 
-- **Stata 17** or later
-- **Python 3** with pandas and matplotlib (`pip install pandas matplotlib`)
+1. Loads raw LFS data
+2. Keeps only employed wage workers
+3. Cleans income — drops missing, zero, and top 1% outliers
+4. Converts education categories into years of schooling
+5. Extracts ISCO-08 major occupation group from 4-digit codes
+6. Assigns required education level per occupation group
+7. Creates OverEdu, UnderEdu, and matched dummies
+8. Creates control variables — female dummy, urban dummy, age squared, experience
+9. Runs descriptive stats and cross-tabs
+10. Makes graphs
+11. Runs OLS regression (two models)
+12. Saves final dataset
