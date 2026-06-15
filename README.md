@@ -54,40 +54,40 @@ Following Duncan & Hoffman (1981), I constructed the mismatch variable by:
 ln(Income) = β0 + β1OverEdu + β2UnderEdu + β3Age + β4Age² + β5Female + β6Urban + Province FE + ε
 
 ---
+## Repository Structure
 
-## Files in This Repository
-
-📁 education-occupation-mismatch-pakistan
+```
+education-occupation-mismatch-pakistan/
 │
-├── 📁 data
+├── data/
 │   ├── LFS_2024_25_clean_mismatch_project.dta
 │   ├── Mismatch_Earnings_LFS2024_25_clean.csv
-│   └── README.md  (explains the variables)
+│   └── README.md
 │
-├── 📁 code
+├── code/
 │   ├── analysis.do
 │   ├── histogram.ipynb
-│   └── README.md  (explains what each file does)
+│   └── README.md
 │
-├── 📁 maps
+├── maps/
 │   ├── map_graph_updated.dta
 │   ├── pakprovcoord.dta
 │   ├── map_province.png
-│   └── README.md  (step by step how to make the map)
+│   └── README.md
 │
-├── 📁 graphs
+├── graphs/
 │   ├── histogram.png
-│   ├── map_province.png
-│   ├── mismatch rate by gender
-|   ├── Log Income by mismatch status
-|   ├── monthly income of workers
-|   ├── relationship between age and income
-│   └── README.md  (explains each graph)
+│   ├── mismatch_rate_by_gender.png
+│   ├── log_income_by_mismatch.png
+│   ├── monthly_income_of_workers.png
+│   ├── age_income_relationship.png
+│   └── README.md
 │
-├── 📁 poster
+├── poster/
 │   └── poster.png
 │
-└── README.md  (main readme)
+└── README.md
+```
 
 ---
 
