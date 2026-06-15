@@ -57,16 +57,37 @@ ln(Income) = β0 + β1OverEdu + β2UnderEdu + β3Age + β4Age² + β5Female + β
 
 ## Files in This Repository
 
-| File | Description |
-|---|---|
-| `analysis.do` | Full Stata code — cleaning, variables, regression |
-| `LFS_2024_25_clean_mismatch_project.dta` | Final cleaned dataset |
-| `Mismatch_Earnings_LFS2024_25_clean.csv` | CSV version of cleaned dataset |
-| `map_province.png` | Province-wise mean income map |
-| `poster.png` | Final research poster |
-| `histogram_income.png` | Income distribution graph |
-| `pakprovcoord.dta` | Pakistan province map coordinates |
-| `map_graph_updated.dta` | Map data with province income values |
+📁 education-occupation-mismatch-pakistan
+│
+├── 📁 data
+│   ├── LFS_2024_25_clean_mismatch_project.dta
+│   ├── Mismatch_Earnings_LFS2024_25_clean.csv
+│   └── README.md  (explains the variables)
+│
+├── 📁 code
+│   ├── analysis.do
+│   ├── histogram.ipynb
+│   └── README.md  (explains what each file does)
+│
+├── 📁 maps
+│   ├── map_graph_updated.dta
+│   ├── pakprovcoord.dta
+│   ├── map_province.png
+│   └── README.md  (step by step how to make the map)
+│
+├── 📁 graphs
+│   ├── histogram.png
+│   ├── map_province.png
+│   ├── mismatch rate by gender
+|   ├── Log Income by mismatch status
+|   ├── monthly income of workers
+|   ├── relationship between age and income
+│   └── README.md  (explains each graph)
+│
+├── 📁 poster
+│   └── poster.png
+│
+└── README.md  (main readme)
 
 ---
 
