@@ -1,13 +1,13 @@
 # Education–Occupation Mismatch and Its Impact on Individual Earnings in Pakistan
 
-**Course Project — Data Analysis | Information Technology University, Lahore**
+**Course Project: Data Analysis | Information Technology University, Lahore**
 **Data: Labour Force Survey 2024–25 | Pakistan Bureau of Statistics**
 
 ---
 
 ## What This Project Is About
 
-Getting more education doesn't always mean earning more money — what matters is whether your education actually matches your job. In Pakistan, a large share of workers are either over-qualified or under-qualified for what they do.
+Getting more education doesn't always mean earning more money, what matters is whether your education actually matches your job. In Pakistan, a large share of workers are either over-qualified or under-qualified for what they do.
 
 This project uses microdata from the Labour Force Survey 2024–25 to answer one question:
 
@@ -109,4 +109,4 @@ education-occupation-mismatch-pakistan/
 
 ---
 
-*This project was completed as part of the Data Analysis course at ITU Lahore (Semester 4, 2026).*
+*This project was completed as part of the Data Analysis course (Semester 4, 2026).*
