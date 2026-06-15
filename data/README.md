@@ -8,7 +8,7 @@ This folder has the cleaned dataset I used for the analysis. The raw LFS file fr
 
 | File | Description |
 |---|---|
-| `LFS_2024_25_clean_mismatch_project.dta` | Final cleaned dataset — Stata format (24,042 obs, 26 variables) |
+| `LFS_2024_25_clean_mismatch_project.dta` | Final cleaned dataset, Stata format (24,042 obs, 26 variables) |
 | `Mismatch_Earnings_LFS2024_25_clean.csv` | Same thing but in CSV so you can open it without Stata |
 
 ---
@@ -36,12 +36,12 @@ Download the raw file from there, then run `code/analysis.do` to replicate every
 | `schooling_years` | Years of schooling (converted from education categories) |
 | `occ_major` | ISCO-08 major occupation group (1–9) |
 | `income` | Monthly net earnings in PKR |
-| `ln_income` | Log of monthly income — used as dependent variable in regression |
+| `ln_income` | Log of monthly income, used as dependent variable in regression |
 | `experience` | Approximate work experience using Mincer formula |
 | `OverEdu` | 1 = over-educated for their job |
 | `UnderEdu` | 1 = under-educated for their job |
-| `mismatch` | Categorical — Over-educated / Under-educated / Matched |
-| `age_sq` | Age squared — captures the non-linear age-earnings relationship |
+| `mismatch` | Categorical, Over-educated / Under-educated / Matched |
+| `age_sq` | Age squared, captures the non-linear age-earnings relationship |
 
 ---
 
