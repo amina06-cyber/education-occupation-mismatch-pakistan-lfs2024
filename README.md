@@ -1,147 +1,91 @@
 # Education–Occupation Mismatch and Its Impact on Individual Earnings in Pakistan
 
-This repository contains the code and outputs for my poster project:
-
-**“Education–Occupation Mismatch and Its Impact on Individual Earnings in Pakistan (Labour Force Survey 2024–25)”**
+**Course Project — Data Analysis | Information Technology University, Lahore**
+**Data: Labour Force Survey 2024–25 | Pakistan Bureau of Statistics**
 
 ---
 
-## 1. Project Overview
+## What This Project Is About
 
-In many labour markets, getting more education does not always mean earning more money – what matters is whether your education matches your job. In Pakistan, a large share of workers are either over‑qualified or under‑qualified for the jobs they do.
+Getting more education doesn't always mean earning more money — what matters is whether your education actually matches your job. In Pakistan, a large share of workers are either over-qualified or under-qualified for what they do.
 
-This project uses microdata from the Pakistan Labour Force Survey (LFS) 2024–25 to answer:
+This project uses microdata from the Labour Force Survey 2024–25 to answer one question:
 
 > Does education–occupation mismatch significantly affect individual monthly earnings in Pakistan?
 
 ---
 
-## 2. Data
+## Key Findings
 
-- **Source:** Pakistan Labour Force Survey 2024–25 (Pakistan Bureau of Statistics).  
-- **Population:** Individuals aged 10+ in Pakistan.  
-- **Analytical sample:**
-  - Employed individuals aged 15–65  
-  - Positive monthly wage/salary income  
-  - Final sample size after cleaning: approximately 24,000 workers
-
-> **Note:** The raw LFS microdata are not included in this repository due to access and confidentiality. All code assumes the user has access to the original LFS file from PBS.
-
-### Key variables
-
-- `income` – monthly wage/salary income (PKR)  
-- `lnincome` – natural log of monthly income (constructed)  
-- `age`, `age2` – age in years and age squared  
-- `schooling` – years of schooling (constructed from LFS education codes)  
-- `gender` – dummy for female  
-- `urban` – dummy for urban location  
-- `province` – province identifier / fixed effects  
-- `over_educated`, `under_educated`, `matched` – education–occupation mismatch dummies
+- Only **20% of workers** are properly matched to their jobs
+- **Over-educated workers** earn **15.5% less** than matched workers despite having more education
+- **Under-educated workers** earn **19.5% less** than matched workers
+- **Women** earn **3.8% less** than men after controlling for everything else
+- **Urban workers** earn **7.4% more** than rural workers
+- Women make up only **5.6% of over-educated workers** but **22.9% of under-educated workers**
 
 ---
 
-## 3. Methodology
+## Data
 
-### 3.1 Sample cleaning
-
-Implemented in `code/01_cleaning_and_sample.do`:
-
-1. Load the LFS worker file.  
-2. Keep employed / self‑employed individuals.  
-3. Drop observations with zero or missing income.  
-4. Trim the top 1% of the income distribution to reduce the influence of extreme outliers.  
-5. Generate log income:
-
-   - `gen lnincome = ln(income)`
-
-### 3.2 Constructing education–occupation mismatch
-
-Implemented in `code/02_construct_mismatch.do`.
-
-1. Convert categorical education codes to **years of schooling** using an ISCED‑style mapping (e.g., primary, middle, matric, intermediate, bachelor’s, master’s, etc.).  
-2. Derive **occupation major groups** from the 4‑digit PSCO/ISCO codes (managers, professionals, technicians, service/sales, agriculture, craft, machine operators, elementary jobs).  
-3. Assign a **required education level** to each occupation group (ORU‑style rule), for example:
-
-   - Managers and professionals → degree or above  
-   - Technicians and clerical workers → intermediate  
-   - Service and skilled agriculture / craft / operators → middle or matric  
-   - Elementary jobs → primary
-
-4. Compare actual vs required education to create mismatch dummies:
-
-   - `over_educated = 1` if actual education > required education  
-   - `under_educated = 1` if actual education < required education  
-   - `matched = 1` if actual education == required education (reference group)
-
-### 3.3 Regression model
-
-Implemented in `code/03_regression_and_tables.do`.
-
-The main earnings equation is a standard OLS model:
-
-> log(income_i) = β0  
-> + β1 * OverEdu_i  
-> + β2 * UnderEdu_i  
-> + β3 * Age_i  
-> + β4 * AgeSquared_i  
-> + β5 * Female_i  
-> + β6 * Urban_i  
-> + Province fixed effects  
-> + error_i
-
-- **Dependent variable:** `lnincome` (natural log of monthly income).  
-- **Key variables of interest:** `over_educated` and `under_educated` (with `matched` as the omitted category).  
-- **Controls:** age, age squared, gender, urban/rural, province fixed effects, and years of schooling.
-
-Interpretation (approximate, since the dependent variable is in logs):
-
-- Under‑educated workers earn about **19.5% less** than matched workers, holding other factors constant.  
-- Over‑educated workers earn about **15.5% less** than matched workers.  
-- Female workers earn about **3.8% less** than otherwise similar male workers.  
-- Urban workers earn about **7.4% more** than rural workers.
+- **Source:** Pakistan Labour Force Survey 2024–25 (Pakistan Bureau of Statistics)
+- **Raw sample:** 325,445 individuals
+- **Final sample:** 24,042 employed wage workers aged 15–65 with positive monthly income
+- **Note:** Raw LFS microdata not included due to access restrictions. Download from PBS website.
 
 ---
 
-## 4. Key Findings
+## Methodology
 
-- Education–occupation mismatch is widespread: roughly **two‑thirds** of workers are either over‑ or under‑educated for their job.  
-- Both under‑education and over‑education are associated with substantial earnings penalties relative to matched workers.  
-- Women are more likely to be over‑educated and face an additional wage gap.  
-- Urban workers earn significantly more than rural workers, even after adjusting for education and mismatch.
+### Mismatch Construction (ORU Approach)
+Following Duncan & Hoffman (1981), I constructed the mismatch variable by:
+1. Converting education categories to years of schooling
+2. Extracting ISCO-08 major occupation groups from 4-digit codes
+3. Assigning required education per occupation group
+4. Comparing actual vs required education
 
-These patterns suggest that Pakistan’s labour market is not using human capital efficiently and that better job–education alignment could raise productivity and reduce inequality.
+| Mismatch Status | Definition |
+|---|---|
+| Over-educated | Actual education > Required education |
+| Under-educated | Actual education < Required education |
+| Matched (base) | Actual education = Required education |
 
----
-
-## 5. Repository Structure
-
-Suggested layout:
-
-```text
-.
-├── README.md
-├── code
-│   ├── 01_cleaning_and_sample.do
-│   ├── 02_construct_mismatch.do
-│   └── 03_regression_and_tables.do
-├── outputs
-│   ├── descriptive_stats.csv
-│   ├── regression_results.csv
-│   └── plots/
-│       ├── income_distribution.png
-│       ├── log_income_by_mismatch.png
-│       ├── mismatch_by_gender.png
-│       └── age_income_relationship.png
-└── poster
-    └── education-occupation-mismatch-poster.jpg
-```
+### Regression Model
+ln(Income) = β0 + β1OverEdu + β2UnderEdu + β3Age + β4Age² + β5Female + β6Urban + Province FE + ε
 
 ---
 
-## 6. Skills Demonstrated
+## Files in This Repository
 
-- Data cleaning and wrangling with Stata (LFS microdata)  
-- Feature engineering (education years, occupation groups, mismatch indicators)  
-- Econometric modelling (log‑income OLS, interpretation of coefficients and significance)  
-- Data visualization (distribution plots, group comparisons, regression results)  
-- Research communication (academic poster and written summary)
+| File | Description |
+|---|---|
+| `analysis.do` | Full Stata code — cleaning, variables, regression |
+| `LFS_2024_25_clean_mismatch_project.dta` | Final cleaned dataset |
+| `Mismatch_Earnings_LFS2024_25_clean.csv` | CSV version of cleaned dataset |
+| `map_province.png` | Province-wise mean income map |
+| `poster.png` | Final research poster |
+| `histogram_income.png` | Income distribution graph |
+| `pakprovcoord.dta` | Pakistan province map coordinates |
+| `map_graph_updated.dta` | Map data with province income values |
+
+---
+
+## Tools Used
+
+- **Stata 17** — data cleaning, variable construction, regression, maps
+- **Python (Google Colab)** — histogram visualization
+- **Power BI** — additional graphs
+- **Canva** — poster design
+
+---
+
+## References
+
+- Duncan & Hoffman (1981). Occupational Choice and Distribution of Earnings.
+- PIDE (2024). Impact of Education Mismatch on Earnings: Evidence from Pakistan.
+- Mahmood & Rana (2026). Education-Occupation Mismatch and the Role of Internal Migration Streams in Shaping Returns to Education. *Asian Journal of Applied Economics.*
+- Pakistan Bureau of Statistics. Labour Force Survey 2024–25.
+
+---
+
+*This project was completed as part of the Data Analysis course at ITU Lahore (Semester 4, 2026).*
