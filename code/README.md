@@ -22,7 +22,7 @@ cd "your/project/folder"
 do analysis.do
 ```
 
-The do-file goes through everything in order — loads the data, cleans it, builds the mismatch variable, runs descriptive stats, makes the graphs, and runs the regression. Comments inside the file explain each step.
+The do-file goes through everything in order, loads the data, cleans it, builds the mismatch variable, runs descriptive stats, makes the graphs, and runs the regression. Comments inside the file explain each step.
 
 ---
 
@@ -41,7 +41,7 @@ Open `histogram.ipynb` in Google Colab or Jupyter. Upload the CSV file from the 
 5. Extracts ISCO-08 major occupation group from 4-digit codes
 6. Assigns required education level per occupation group
 7. Creates OverEdu, UnderEdu, and matched dummies
-8. Creates control variables — female dummy, urban dummy, age squared, experience
+8. Creates control variables like female dummy, urban dummy, age squared, experience
 9. Runs descriptive stats and cross-tabs
 10. Makes graphs
 11. Runs OLS regression (two models)
